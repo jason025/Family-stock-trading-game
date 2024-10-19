@@ -1,0 +1,370 @@
+body {
+    font-family: 'Arial', sans-serif;
+    max-width: 1200px; /* 增加页面宽度 */
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+.container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+h1, h2, h3 {
+    color: #333;
+    margin-top: 0;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+}
+button {
+    margin: 5px;
+    padding: 8px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #45a049;
+}
+button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+#dice {
+    font-size: 48px;
+    margin: 10px 0;
+}
+.profit { color: green; }
+.loss { color: red; }
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.flex-item {
+    flex: 1;
+    min-width: 400px; /* 增加最小宽度 */
+    margin: 10px;
+}
+#diceResult {
+    background-color: #e9e9e9;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+#roundInfo {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 20px;
+}
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.dice-info, .investment-info {
+    flex: 1;
+    background-color: #e9e9e9;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px;
+    max-width: 48%; /* 确保两个元素各占大约50%宽度 */
+}
+#diceResult, #investmentResult {
+    min-height: 100px; /* 设置最小高度，保持布局一致性 */
+    overflow-y: auto; /* 如果内容过多，添加垂直滚动条 */
+}
+.current-player-name {
+    color: red;
+    font-weight: bold;
+}
+.stock-feature {
+    font-size: 0.9em;
+    line-height: 1.2;
+}
+.game-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+.game-controls > div {
+    flex: 1;
+    margin-right: 20px;
+}
+.game-controls > div:last-child {
+    margin-right: 0;
+    display: flex;
+    justify-content: flex-start; /* 改为 flex-start */
+    flex: 0.5; /* 减小最后一个 div 的宽度 */
+}
+.game-controls button {
+    margin-right: 10px; /* 给按钮之间添加一些间距 */
+}
+.dice-area {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+#dice {
+    font-size: 48px;
+    margin-right: 20px;
+}
+
+/* 在文件末尾添加以下样式 */
+.settings-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content input {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.modal-content button {
+    width: 100%;
+}
+
+.player-details table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.player-details th, .player-details td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.player-details th {
+    background-color: #f2f2f2;
+}
+
+.player-details .total {
+    font-weight: bold;
+    background-color: #e9e9e9;
+}
+
+.event-message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    z-index: 1000;
+    animation: fadeInOut 5s ease-in-out;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0; }
+    10%, 90% { opacity: 1; }
+}
+
+#stockChart {
+    width: 100% !important;
+    height: 100% !important; /* 改为 100% */
+    margin-bottom: 20px;
+    max-width: 100%;
+}
+
+/* 添加一个新的类来控制图表容器的大小 */
+.chart-container {
+    width: 100%;
+    height: 300px; /* 增加高度 */
+    margin-bottom: 20px;
+    position: relative; /* 添加这行 */
+}
+
+.event-modal-content {
+    width: 80%;
+    max-width: 600px;
+    margin: 10% auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.event-modal-content h3 {
+    color: #333;
+    margin-top: 0;
+}
+
+.event-modal-content ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.event-modal-content li {
+    margin-bottom: 10px;
+    padding: 5px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+.player-details {
+    width: 100%;
+    max-width: 1200px; /* 增加最大宽度 */
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #ffffff; /* 改为白色背景 */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.player-details h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px; /* 增加字体大小 */
+    color: #666; /* 使标题颜色更淡 */
+}
+
+.asset-summary {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+    font-size: 22px; /* 增加字体大小 */
+    font-weight: bold;
+}
+
+.player-details table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+}
+
+.player-details th, .player-details td {
+    padding: 15px;
+    text-align: left;
+    border: none;
+    font-size: 18px;
+}
+
+.player-details th {
+    background-color: #f0f0f0; /* 更淡的背景色 */
+    color: #333; /* 更深的文字颜色 */
+}
+
+.player-details tr:nth-child(even) {
+    background-color: #f9f9f9; /* 更淡的背景色 */
+}
+
+.player-details tr:hover {
+    background-color: #f0f0f0;
+}
+
+/* 修改模态框内容样式 */
+.modal-content {
+    width: 95%;
+    max-width: 250px; /* 将游戏设置页面的宽度改为250px */
+    margin: 5% auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* 移除多余的背景块 */
+.modal {
+    background-color: rgba(0,0,0,0.5); /* 半透明黑色背景 */
+}
+
+#playerDetailsContent {
+    background-color: transparent; /* 移除白色背景 */
+}
+
+/* 确保玩家详情内容直接使用模态框的背景 */
+#playerDetailsModal .modal-content {
+    max-width: 900px; /* 将最大宽度从 1200px 减小到 900px */
+    width: 90%; /* 保持宽度的响应性 */
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+/* 调整玩家详情样式 */
+.player-details {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 15px; /* 稍微减小内边距 */
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.player-details h2 {
+    font-size: 24px; /* 稍微减小标题字体大小 */
+    margin-bottom: 20px;
+}
+
+.asset-summary {
+    font-size: 18px; /* 稍微减小摘要字体大小 */
+    margin-bottom: 20px;
+}
+
+.player-details table {
+    font-size: 14px; /* 稍微减小表格字体大小 */
+}
+
+.player-details th, .player-details td {
+    padding: 10px; /* 减小单元格内边距 */
+}
+
+/* 其他样式保持不变 */

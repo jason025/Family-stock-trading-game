@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>家庭股票游戏</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+</head>
+<body>
+    <div id="settingsButton" class="settings-button">
+        <i class="fas fa-cog"></i>
+    </div>
+
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>游戏设置</h2>
+            <label for="totalRoundsInput">总回合数：</label>
+            <input type="number" id="totalRoundsInput" min="1" value="10">
+            <label for="initialFundsInput">初始资金：</label>
+            <input type="number" id="initialFundsInput" min="1000" value="10000">
+            <label for="blackSwanProbabilityInput">黑天鹅事件概率（%）：</label>
+            <input type="number" id="blackSwanProbabilityInput" min="0" max="100" value="5">
+            <label for="economicCrisisProbabilityInput">经济危机概率（%）：</label>
+            <input type="number" id="economicCrisisProbabilityInput" min="0" max="100" value="3">
+            <label for="predictionAccuracyInput">股价预测准确率（%）：</label>
+            <input type="number" id="predictionAccuracyInput" min="0" max="100" value="70">
+            <button onclick="saveSettings()">保存设置</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>家庭股票游戏</h1>
+        <div id="setupArea">
+            <p id="initialFundsDisplay">每位玩家初始资金：10000元</p>
+            <div id="players"></div>
+            <button onclick="addPlayer()">添加玩家</button>
+            <button onclick="startGame()" id="startGameButton">开始游戏</button>
+        </div>
+        <div id="gameArea" style="display:none;">
+            <div class="flex-container">
+                <div class="flex-item">
+                    <h2>股票走势图</h2>
+                    <div class="chart-container">
+                        <canvas id="stockChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-container">
+                <div class="flex-item">
+                    <h2>股票市场</h2>
+                    <table id="stockMarket"></table>
+                </div>
+                <div class="flex-item">
+                    <h2>玩家资金</h2>
+                    <table id="playerMoney"></table>
+                </div>
+            </div>
+            <div class="flex-container">
+                <div class="flex-item" id="currentPlayer"></div>
+                <div class="flex-item">
+                    <h3>掷骰子</h3>
+                    <div class="dice-area">
+                        <div id="dice">🎲</div>
+                        <button onclick="rollDice()">骰子</button>
+                    </div>
+                </div>
+            </div>
+            <div class="game-info">
+                <div class="dice-info">
+                    <h4>骰子结果：</h4>
+                    <div id="diceResult"></div>
+                </div>
+                <div class="investment-info">
+                    <h4>投资结果：</h4>
+                    <div id="investmentResult"></div>
+                </div>
+            </div>
+            <div class="game-controls">
+                <div>
+                    <label for="stockSelect">选择股票：</label>
+                    <select id="stockSelect"></select>
+                </div>
+                <div>
+                    <label for="amount">投资金额（100的倍数）：</label>
+                    <input type="number" id="amount" step="100" min="100" value="200">
+                </div>
+                <div>
+                    <button onclick="invest()">投资</button>
+                    <button onclick="nextTurn()" disabled id="nextTurnButton">下一轮玩家</button>
+                </div>
+            </div>
+            <div id="roundInfo"></div>
+        </div>
+        <div id="gameResult" style="display:none;">
+            <h2>游戏结果</h2>
+            <div id="winner"></div>
+            <table id="finalResults"></table>
+        </div>
+        <!-- 在 body 标签结束前添加以下代码 -->
+        <div id="playerDetailsModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="playerDetailsContent"></div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
